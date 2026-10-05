@@ -10,14 +10,18 @@ Alles läuft im Browser; es wird kein Bild hochgeladen. Nichts davon ist eine Zu
 | `wasm/vision_wasm_internal.wasm` | Rechenbibliothek (WebAssembly, mit SIMD) | 11.756.954 Bytes |
 | `wasm/vision_wasm_nosimd_internal.js` | Lader für ältere Browser ohne SIMD | 323.180 Bytes |
 | `wasm/vision_wasm_nosimd_internal.wasm` | Rechenbibliothek für ältere Browser ohne SIMD | 10.960.242 Bytes |
-| `selfie_segmenter.tflite` | KI-Modell „Selfie Segmenter“ (Person/Hintergrund, 256×256, float16) | 249.537 Bytes |
+| `selfie_multiclass_256x256.tflite` | KI-Modell „Selfie Multiclass“ (Standard; Klassen 0 Hintergrund, 1 Haare, 2 Körperhaut, 3 Gesichtshaut, 4 Kleidung, 5 Zubehör; 256×256, float32) | 16.371.837 Bytes |
+| `selfie_segmenter.tflite` | KI-Modell „Selfie Segmenter“ (Ersatz, `RSSeg.modell = "selfie"`; Person/Hintergrund, 256×256, float16) | 249.537 Bytes |
 
-Gesamt: 23.768.729 Bytes (rund 22,7 MiB). Der Browser lädt je Besuch nur eine WASM-Variante
-(etwa 12 MB), danach greift der Browser-Cache.
+Gesamt: 40.140.566 Bytes (rund 38,3 MiB). Der Browser lädt je Besuch nur eine WASM-Variante
+(etwa 12 MB) und das gewählte Modell (16 MB bzw. 0,25 MB), danach greift der Browser-Cache.
 
 ## Quelle und Version
 - Paket `@mediapipe/tasks-vision`, Version **1.0.1** (npm, geladen am 05.10.2026 über
   `https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@1.0.1/`).
+- Modell `selfie_multiclass_256x256.tflite` von
+  `https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_multiclass_256x256/float32/latest/selfie_multiclass_256x256.tflite`
+  (Google, geladen am 05.10.2026). Person = alles außer Hintergrund (1 − Hintergrund-Konfidenz).
 - Modell `selfie_segmenter.tflite` von
   `https://storage.googleapis.com/mediapipe-models/image_segmenter/selfie_segmenter/float16/latest/selfie_segmenter.tflite`
   (Google, Modellkarte: https://developers.google.com/mediapipe/solutions/vision/image_segmenter).
